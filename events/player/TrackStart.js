@@ -39,7 +39,7 @@ export default class TrackStart extends Event {
             .setDescription(`**[${track.info.title}](${track.info.uri})**`)
             .setFooter({
             text: `Requested by ${track.info.requester.tag}`,
-            iconURL: track.info.requester.avatarURL,
+            iconURL: track.info.requester.avatarURL({}),
         })
             .setThumbnail(track.info.thumbnail)
             .addFields({
