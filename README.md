@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/h00z3x/Lost-Music-V2">
-    <img src="" alt="Logo" width="80" height="80">
+    <img src="https://cdn.discordapp.com/icons/1015701743583113247/af60925b2ade41e55f3f14b11f00dde0.webp?size=1024" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Lost Island Music V2</h3>
