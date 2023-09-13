@@ -7,7 +7,7 @@
 <h3 align="center">Lost Island Music V2</h3>
 
   <p align="center">
-    An edited version of [LavaMusic](https://github.com/brblacky/lavamusic).
+    An edited version of <a href="https://github.com/brblacky/lavamusic">LavaMusic</a>.
     <br/>
     <br/>
     <a href="https://github.com/h00z3x/Lost-Music-V2/issues">Report Bug</a>
