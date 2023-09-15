@@ -21,7 +21,7 @@ export default class lowPass extends Command {
             permissions: {
                 dev: false,
                 client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
-                user: ['ManageGuild'],
+                user: [],
             },
             slashCommand: false,
         });

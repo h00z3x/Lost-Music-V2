@@ -21,7 +21,7 @@ export default class BassBoost extends Command {
             permissions: {
                 dev: false,
                 client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
-                user: ['ManageGuild'],
+                user: [],
             },
             slashCommand: true,
         });
