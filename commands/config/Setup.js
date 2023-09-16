@@ -46,6 +46,20 @@ export default class Setup extends Command {
         });
     }
     async run(client, ctx, args) {
+        if (
+            !(await client.prisma.guild.findUnique({
+                where: {
+                    guildId: ctx.guild.id,
+                },
+            }))
+        ) {
+            await client.prisma.guild.create({
+                data: {
+                    guildId: ctx.guild.id,
+                    prefix: client.config.prefix,
+                },
+            });
+        }
         let subCommand;
         if (ctx.isInteraction) {
             subCommand = ctx.interaction.options.data[0].name;

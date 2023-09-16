@@ -1,4 +1,5 @@
 import { Command } from '../../structures/index.js';
+
 export default class _247 extends Command {
     constructor(client) {
         super(client, {
@@ -27,7 +28,22 @@ export default class _247 extends Command {
             options: [],
         });
     }
+
     async run(client, ctx, args) {
+        if (
+            !(await client.prisma.guild.findUnique({
+                where: {
+                    guildId: ctx.guild.id,
+                },
+            }))
+        ) {
+            await client.prisma.guild.create({
+                data: {
+                    guildId: ctx.guild.id,
+                    prefix: client.config.prefix,
+                },
+            });
+        }
         const embed = client.embed();
         let player = client.shoukaku.players.get(ctx.guild.id);
         const data = await client.prisma.stay.findFirst({
@@ -45,19 +61,31 @@ export default class _247 extends Command {
                 },
             });
             if (!player)
-                player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.getNode());
+                player = await client.queue.create(
+                    ctx.guild,
+                    vc.voice.channel,
+                    ctx.channel,
+                    client.shoukaku.getNode(),
+                );
             return ctx.sendMessage({
-                embeds: [embed.setDescription(`**247 mode has been enabled**`).setColor(client.color.main)],
+                embeds: [
+                    embed
+                        .setDescription(`**247 mode has been enabled**`)
+                        .setColor(client.color.main),
+                ],
             });
-        }
-        else {
+        } else {
             await client.prisma.stay.delete({
                 where: {
                     guildId: ctx.guild.id,
                 },
             });
             return ctx.sendMessage({
-                embeds: [embed.setDescription(`**247 mode has been disabled**`).setColor(client.color.red)],
+                embeds: [
+                    embed
+                        .setDescription(`**247 mode has been disabled**`)
+                        .setColor(client.color.red),
+                ],
             });
         }
     }
