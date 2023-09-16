@@ -82,6 +82,7 @@ LAVALINK_SECURE= "" # true for secure lavalink
 BOT_ACTIVITY_TYPE=2 # Activity type is a number from 0 to 5 see more here https://discord.com/developers/docs/topics/gateway-events#activity-object-activity-types
 BOT_STATUS="idle"
 BOT_ACTIVITY="Lost Music"
+GENIUS_KEY=""
 ```
 
 4. Generate Prisma

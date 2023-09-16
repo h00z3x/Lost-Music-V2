@@ -8,6 +8,7 @@ import loadPlugins from '../plugin/index.js';
 import { ShoukakuClient, Queue } from './index.js';
 import { Utils } from '../utils/Utils.js';
 import { PrismaClient } from '@prisma/client';
+import Genius from "genius-lyrics";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default class Lavamusic extends Client {
     constructor(options) {
@@ -23,6 +24,7 @@ export default class Lavamusic extends Client {
         this.utils = Utils;
         this.queue = new Queue(this);
         this.shoukaku = new ShoukakuClient(this);
+        this.genius = new Genius.Client(config.geniusKey);
     }
     embed() {
         return new EmbedBuilder();

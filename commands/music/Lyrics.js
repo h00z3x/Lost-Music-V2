@@ -1,6 +1,4 @@
 import {Command} from '../../structures/index.js';
-import Genius from "genius-lyrics";
-
 export default class Lyrics extends Command {
     constructor(client) {
         super(client, {
@@ -34,16 +32,20 @@ export default class Lyrics extends Command {
                     description: 'The song you want to play',
                     type: 3,
                     required: true,
-                    autocomplete: false,
+                    autocomplete: true,
                 },
             ],
         });
     }
 
+
     async run(client, ctx, args) {
-        const Client = new Genius.Client("c_pCGV2dipTZAvKmH3u2OunaIVYgIuKAVgy3KpSi183ELJue_CyLo3fR9azKxn9l");
+        if (ctx.isInteraction) {
+            await ctx.interaction.deferReply({ephemeral: true});
+            await ctx.interaction.deleteReply();
+        }
         const song = args.join(' ');
-        const searches = await Client.songs.search(song);
+        const searches = await client.genius.songs.search(song);
         const firstSong = searches[0];
         let lyrics = await firstSong.lyrics();
         let embed = this.client.embed()
@@ -66,14 +68,14 @@ export default class Lyrics extends Command {
         }
 
         for (let i in lyrics) {
-            await ctx.sendMessage({
+            await ctx.channel.send({
                 embeds: [
                     embed.setColor(this.client.color.main)
                         .setTitle(`Lyrics - Page ${(parseInt(i) + 1).toString()}`)
                         .setThumbnail(firstSong.image)
                         .setDescription(lyrics[i])
                         .setFooter({
-                            text: `Lyrics | ${firstSong.fullTitle}`,
+                            text: `Lyrics | ${firstSong.fullTitle}${ctx.isInteraction?` | requested by ${ctx.author.username}`:``}`,
                         })
                 ]
             })

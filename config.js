@@ -41,6 +41,7 @@ let exports = {
             secure: parseBoolean(process.env.LAVALINK_SECURE) || false,
         },
     ],
+    geniusKey: process.env.GENIUS_KEY,
 };
 for (const i in lavalinks.list) {
     exports.lavalink.push(lavalinks.list[i])

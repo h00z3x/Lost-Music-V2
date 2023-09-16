@@ -171,6 +171,20 @@ export default class InteractionCreate extends Event {
                 }
                 interaction.respond(songs).catch(() => { });
             }
+            if (interaction.commandName == "lyrics") {
+                const song = interaction.options.getString("song");
+                const res = await this.client.genius.songs.search(song);
+                let songs = [];
+                if (res[0]?.fullTitle) {
+                    for (const song of res) {
+                        songs.push({
+                            name: song.fullTitle,
+                            value: song.fullTitle
+                        });
+                    }
+                }
+                interaction.respond(songs).catch(() => { });
+            }
         }
         else if (interaction.isButton()) {
             const setup = await this.client.prisma.setup.findUnique({
