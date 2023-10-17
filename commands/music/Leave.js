@@ -1,4 +1,5 @@
 import { Command } from '../../structures/index.js';
+import { updateSetup } from '../../utils/SetupSystem.js';
 export default class Leave extends Command {
     constructor(client) {
         super(client, {
@@ -37,6 +38,7 @@ export default class Leave extends Command {
                 ],
             });
             player.destroy();
+            await updateSetup(client, ctx.guild);
         }
         else {
             ctx.sendMessage({
