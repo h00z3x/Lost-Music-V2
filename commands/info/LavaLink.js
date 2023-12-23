@@ -55,7 +55,6 @@ export default class LavaLink extends Command {
         }
 
         for (const field of fields) {
-            const i = fields.indexOf(field);
             const embed = this.client.embed();
             embed.setTitle("Lavalink Stats");
             embed.setColor(this.client.color.main);
