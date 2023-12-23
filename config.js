@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { SearchEngine } from './types.js';
-import * as lavalinks from "./lavalinks.json" assert { type: 'json' };
+import list from './lavalinks.json' assert { type: 'json'};
 
 dotenv.config();
 let exports = {
@@ -40,12 +40,10 @@ let exports = {
             name: process.env.LAVALINK_NAME,
             secure: parseBoolean(process.env.LAVALINK_SECURE) || false,
         },
+        ...list.list,
     ],
     geniusKey: process.env.GENIUS_KEY,
 };
-for (const i in lavalinks.list) {
-    exports.lavalink.push(lavalinks.list[i])
-}
 export default exports;
 function parseBoolean(value) {
     if (typeof value === 'string') {
