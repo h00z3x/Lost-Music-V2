@@ -50,7 +50,7 @@ export default class LavaLink extends Command {
 
         for (let i = 0; i < nodes.length; i+=3) {
             nodes[i+2]?fields.push([...nodes[i], ...nodes[i+1], ...nodes[i+2]]):
-                nodes[1+1]?fields.push([...nodes[i], ...nodes[i+1]]):
+                nodes[i+1]?fields.push([...nodes[i], ...nodes[i+1]]):
                     fields.push(...nodes[i]);
         }
 
