@@ -1,21 +1,122 @@
 {
   "list": [
     {
-      "url": "35.221.56.124:4027",
+      "name": "Lexnet.cc - NA",
+      "url": "lavalink.lexnet.cc:443",
+      "auth": "lexn3tl@val!nk",
+      "secure": true
+    },
+    {
+      "name": "Lexnet.cc - EU",
+      "url": "eu-lavalink.lexnet.cc:443",
+      "auth": "lexn3tl@val!nk",
+      "secure": true
+    },
+    {
+      "name": "Lexnet.cc - OCE",
+      "url": "oce-lavalink.lexnet.cc:443",
+      "auth": "lexn3tl@val!nk",
+      "secure": true
+    },
+    {
+      "name": "Horizxon - SG",
+      "url": "lava.horizxon.tech:80",
+      "auth": "horizxon.tech",
+      "secure": false
+    },
+    {
+      "name": "Horizxon-1 (EU)",
+      "url": "lava1.horizxon.tech:443",
+      "auth": "horizxon.tech",
+      "secure": true
+    },
+    {
+      "name": "Horizxon-2 (US)",
+      "url": "lava2.horizxon.tech:443",
+      "auth": "horizxon.tech",
+      "secure": true
+    },
+    {
+      "name": "Horizxon-3 (CA)",
+      "url": "lava3.horizxon.tech:443",
+      "auth": "horizxon.tech",
+      "secure": true
+    },
+    {
+      "name": "towdawg",
+      "url": "74.201.216.46:4026",
       "auth": "reedrousisgayy",
-      "name": "2",
       "secure": false
     },
     {
-      "url": "54.38.198.23:88",
+      "name": "aadi.png",
+      "url": "54.38.198.24:88",
       "auth": "stonemusicgay",
-      "name": "3",
       "secure": false
     },
     {
-      "url": "lavalink.oryzen.xyz:2248",
-      "auth": "discord.gg/6xpF6YqVDd",
-      "name": "4",
+      "name": "beyond (VN)",
+      "url": "lava-vn.meowsmp.net:2333",
+      "auth": "meowicelava",
+      "secure": false
+    },
+    {
+      "name": "andromeda (GE)",
+      "url": "lava-ge.meowsmp.net:25579",
+      "auth": "meowicelava",
+      "secure": false
+    },
+    {
+      "name": "Moonu (US)",
+      "url": "104.168.24.225:2333",
+      "auth": "moon81238!",
+      "secure": false
+    },
+    {
+      "name": "Made by TRAGIC",
+      "url": "51.161.130.134:10449",
+      "auth": "madebytragic",
+      "secure": false
+    },
+    {
+      "name": "Made by TRAGIC",
+      "url": "51.161.130.134:10308",
+      "auth": "madebytragic",
+      "secure": false
+    },
+    {
+      "name": "Made by TRAGIC",
+      "url": "51.161.130.134:10402",
+      "auth": "madebytragic",
+      "secure": false
+    },
+    {
+      "name": "Made by TRAGIC",
+      "url": "51.161.130.134:10326",
+      "auth": "madebytragic",
+      "secure": false
+    },
+    {
+      "name": "INZEWORLD-NODE (RU)",
+      "url": "85.88.163.80:3128",
+      "auth": "saher.inzeworld.com"
+    },
+    {
+      "name": "PixelMine Node 1 | Germany",
+      "url": "1-de-lavalink.pixelmine.games:26095",
+      "auth": "pixelmine.games",
+      "secure": false
+    },
+    {
+      "name": "PixelMine Node 2 | Poland",
+      "url": "2-pl-lavalink.pixelmine.games:25722",
+      "auth": "pixelmine.games",
+      "secure": false
+    },
+    {
+      "name": "PixelMine Node 3 | Canada",
+      "url": "3-ca-lavalink.pixelmine.games:26288",
+      "auth": "pixelmine.games",
       "secure": false
     }
   ]
