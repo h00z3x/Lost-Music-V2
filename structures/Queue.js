@@ -1,5 +1,4 @@
 import { Dispatcher } from './index.js';
-import shoukaku from 'shoukaku';
 export class Queue extends Map {
     constructor(client) {
         super();
@@ -26,7 +25,7 @@ export class Queue extends Map {
         if (!guild)
             throw new Error('No guild was provided');
         if (!dispatcher) {
-            const node = givenNode || this.client.shoukaku.options.nodeResolver(shoukaku.nodes);
+            const node = givenNode || this.client.shoukaku.options.nodeResolver(this.client.shoukaku.nodes);
             const player = await this.client.shoukaku.joinVoiceChannel({
                 guildId: guild.id,
                 channelId: voice.id,
