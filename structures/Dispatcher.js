@@ -55,7 +55,7 @@ export default class Dispatcher {
             this.matchedTracks = [];
         const search = (await this.node.rest.resolve(`${this.client.config.searchEngine}:${this.current?.info.title} ${this.current?.info.author}`));
         this.matchedTracks.push(...search.tracks);
-        this.player.playTrack({ track: this.current?.track });
+        await this.player.playTrack({ track: this.current?.track });
     }
     pause() {
         if (!this.player)
@@ -84,9 +84,9 @@ export default class Dispatcher {
         this.queue.unshift(this.previous);
         this.player.stopTrack();
     }
-    destroy() {
+    async destroy() {
         this.queue.length = 0;
-        this.player.connection.disconnect();
+        await this.client.shoukaku.leaveVoiceChannel(this.player.guildId);
         this.client.queue.delete(this.guildId);
         if (this.stopped)
             return;

@@ -31,7 +31,7 @@ export default class SetupSystem extends Event {
         ;
         let player = this.client.queue.get(message.guildId);
         if (!player) {
-            player = await this.client.queue.create(message.guild, message.member.voice.channel, message.channel, this.client.shoukaku.getNode());
+            player = await this.client.queue.create(message.guild, message.member.voice.channel, message.channel, this.client.shoukaku.options.nodeResolver(this.client.shoukaku.nodes));
         }
         await setupStart(this.client, message.content, player, message);
         if (message)

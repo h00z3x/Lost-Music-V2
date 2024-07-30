@@ -54,7 +54,7 @@ export default class Load extends Command {
         for await (const song of JSON.parse(playlistData.songs).map(s => JSON.parse(s))) {
             const vc = ctx.member;
             if (!player)
-                player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.getNode());
+                player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.options.nodeResolver(client.shoukaku.nodes));
             song.requester = ctx.author;
             const track = player.buildTrack(song, ctx.author);
             player.queue.push(track);

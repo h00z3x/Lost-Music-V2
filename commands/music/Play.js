@@ -43,7 +43,7 @@ export default class Play extends Command {
         let player = client.queue.get(ctx.guild.id);
         const vc = ctx.member;
         if (!player)
-            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.getNode());
+            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.options.nodeResolver(client.shoukaku.nodes));
         const res = await this.client.queue.search(query);
         const embed = this.client.embed();
         switch (res.loadType) {

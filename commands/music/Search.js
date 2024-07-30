@@ -41,7 +41,7 @@ export default class Search extends Command {
         const query = args.join(' ');
         if (!player) {
             const vc = ctx.member;
-            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.getNode());
+            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.options.nodeResolver(client.shoukaku.nodes));
         }
         const res = await this.client.queue.search(query);
         if (!res)

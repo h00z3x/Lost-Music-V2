@@ -1,4 +1,5 @@
 import { Dispatcher } from './index.js';
+import shoukaku from 'shoukaku';
 export class Queue extends Map {
     constructor(client) {
         super();
@@ -25,8 +26,8 @@ export class Queue extends Map {
         if (!guild)
             throw new Error('No guild was provided');
         if (!dispatcher) {
-            const node = givenNode || this.client.shoukaku.getNode();
-            const player = await node.joinChannel({
+            const node = givenNode || this.client.shoukaku.options.nodeResolver(shoukaku.nodes);
+            const player = await this.client.shoukaku.joinVoiceChannel({
                 guildId: guild.id,
                 channelId: voice.id,
                 shardId: guild.shard.id,
@@ -48,7 +49,7 @@ export class Queue extends Map {
         }
     }
     async search(query) {
-        const node = this.client.shoukaku.getNode();
+        const node = this.client.shoukaku.options.nodeResolver(this.client.shoukaku.nodes);
         const regex = /^https?:\/\//;
         let result;
         try {

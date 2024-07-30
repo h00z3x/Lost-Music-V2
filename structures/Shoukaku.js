@@ -9,7 +9,7 @@ export default class ShoukakuClient extends Shoukaku {
             restTimeout: 10000,
         });
         this.client = client;
-        this.on('ready', (name, resumed) => this.client.shoukaku.emit(resumed ? 'nodeReconnect' : 'nodeConnect', this.client.shoukaku.getNode(name)));
+        this.on('ready', (name, resumed) => this.client.shoukaku.emit(resumed ? 'nodeReconnect' : 'nodeConnect', this.client.shoukaku.options.nodeResolver(this.client.shoukaku.nodes)));
         this.on('error', (name, error) => this.client.shoukaku.emit('nodeError', name, error));
         this.on('close', (name, code, reason) => this.client.shoukaku.emit('nodeDestroy', name, code, reason));
         this.on('disconnect', (name, players, moved) => {
