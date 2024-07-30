@@ -32,7 +32,7 @@ export default class Join extends Command {
         const embed = this.client.embed();
         if (!player) {
             const vc = ctx.member;
-            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.getNode());
+            player = await client.queue.create(ctx.guild, vc.voice.channel, ctx.channel, client.shoukaku.options.nodeResolver(client.shoukaku.nodes));
             return ctx.sendMessage({
                 embeds: [
                     embed.setColor(this.client.color.main).setDescription(`Joined <#${player.player.connection.channelId}>`),
