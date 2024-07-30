@@ -60,9 +60,7 @@ export default class LavaLink extends Command {
             embed.setColor(this.client.color.main);
             embed.setThumbnail(this.client.user.avatarURL({}));
             embed.setTimestamp();
-            for (let x of field) {
-                embed.addFields(x);
-            }
+            embed.addFields(field);
             await ctx.sendMessage({ embeds: [embed] })
         }
     }
