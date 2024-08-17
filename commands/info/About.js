@@ -54,7 +54,7 @@ export default class About extends Command {
                 },
                 {
                     name: '\u200b',
-                    value: `This bot is dedicated to lost island network and you can enjoy using it!`,
+                    value: `This bot is dedicated to Lost Island Network but you can use it for free!`,
                     inline: true,
                 },
             ]);
