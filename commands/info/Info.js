@@ -6,12 +6,12 @@ export default class Info extends Command {
         super(client, {
             name: 'info',
             description: {
-                content: 'Ingormation about the bot',
+                content: 'Information about the bot',
                 examples: ['info'],
                 usage: 'info',
             },
             category: 'info',
-            aliases: ['botinfo', 'bi'],
+            aliases: ['botinfo', 'bi', 'information'],
             cooldown: 3,
             args: false,
             player: {
