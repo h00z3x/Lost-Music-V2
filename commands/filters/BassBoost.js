@@ -9,7 +9,7 @@ export default class BassBoost extends Command {
                 usage: 'bassboost',
             },
             category: 'filters',
-            aliases: ['bb'],
+            aliases: ['bb', 'bass', 'boost'],
             cooldown: 3,
             args: false,
             player: {
