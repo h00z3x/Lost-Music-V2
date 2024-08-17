@@ -33,11 +33,8 @@ export default class About extends Command {
             new ButtonBuilder()
                 .setLabel('View Website')
                 .setStyle(ButtonStyle.Link)
-                .setURL(`https://lostisland.gq`),
-            new ButtonBuilder()
-                .setLabel('Join our Server')
-                .setStyle(ButtonStyle.Link)
-                .setURL('https://dsc.gg/lostisland_mc'));
+                .setURL(`https://lostisland.gq`));
+
         const embed = this.client
             .embed()
             .setAuthor({
