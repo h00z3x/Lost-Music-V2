@@ -9,7 +9,7 @@ export default class LavaLink extends Command {
                 usage: 'lavalink',
             },
             category: 'info',
-            aliases: ['ll'],
+            aliases: ['ll', 'lava'],
             cooldown: 3,
             args: false,
             player: {

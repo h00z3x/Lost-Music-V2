@@ -9,7 +9,7 @@ export default class Ping extends Command {
                 usage: 'ping',
             },
             category: 'general',
-            aliases: ['pong'],
+            aliases: ['pong', 'tps', 'status'],
             cooldown: 3,
             args: false,
             player: {
