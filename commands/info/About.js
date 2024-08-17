@@ -31,9 +31,9 @@ export default class About extends Command {
     async run(client, ctx, args) {
         const row = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
-                .setLabel('View Website')
+                .setLabel('View website')
                 .setStyle(ButtonStyle.Link)
-                .setURL(`https://lostisland.gq`));
+                .setURL(`https://snowynetwork.ir`));
 
         const embed = this.client
             .embed()
