@@ -35,7 +35,7 @@ export default class About extends Command {
                 .setStyle(ButtonStyle.Link)
                 .setURL(`https://lostisland.gq`),
             new ButtonBuilder()
-                .setLabel('Join Our Server')
+                .setLabel('Join our Server')
                 .setStyle(ButtonStyle.Link)
                 .setURL('https://dsc.gg/lostisland_mc'));
         const embed = this.client
@@ -54,7 +54,7 @@ export default class About extends Command {
                 },
                 {
                     name: '\u200b',
-                    value: `This bot is dedicated to lost island network and you can enjoy using it!`,
+                    value: `This bot is dedicated to the Snowy Network Discord server!`,
                     inline: true,
                 },
             ]);
