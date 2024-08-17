@@ -6,8 +6,8 @@ export default class Play extends Command {
             description: {
                 content: 'Plays a song from YouTube or Spotify',
                 examples: [
-                    'play https://www.youtube.com/watch?v=QH2-TGUlwu4',
-                    'play https://open.spotify.com/track/6WrI0LAC5M1Rw2MnX2ZvEg',
+                    'play https://www.youtube.com/dQw4w9WgXcQ&pp=ygUIcmlja3JvbGw%3D',
+                    'play https://open.spotify.com/track/6WrI0LAhttps://open.spotify.com/track/4PTG3Z6ehGkBFwjybzWkR8?si=ce654592b9154fd1C5M1Rw2MnX2ZvEg',
                 ],
                 usage: 'play <song>',
             },
