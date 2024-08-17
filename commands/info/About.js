@@ -38,10 +38,10 @@ export default class About extends Command {
         const embed = this.client
             .embed()
             .setAuthor({
-                name: 'Lost Island',
-                iconURL: `https://cdn.discordapp.com/icons/1015701743583113247/af60925b2ade41e55f3f14b11f00dde0.webp`,
+                name: 'Snowy Network',
+                iconURL: `https://cdn.discordapp.com/icons/1174632788796919818/a_99932c3c663490e2513846cc39701fde.gif?size=640`,
             })
-            .setThumbnail('https://cdn.discordapp.com/icons/1015701743583113247/af60925b2ade41e55f3f14b11f00dde0.webp')
+            .setThumbnail('https://cdn.discordapp.com/icons/1174632788796919818/a_99932c3c663490e2513846cc39701fde.gif?size=640')
             .setColor(this.client.color.main)
             .addFields([
                 {
