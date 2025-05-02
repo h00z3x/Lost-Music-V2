@@ -1,242 +1,453 @@
-import { EmbedBuilder } from "discord.js";
-import { getButtons } from "./Buttons.js";
-function neb(embed, player, client) {
-    let iconUrl = client.config.icons[player.current.info.sourceName];
-    if (!iconUrl)
-        iconUrl = client.user.displayAvatarURL({ extension: 'png', });
-    let icon = player.current ? player.current.info.thumbnail : client.config.links.img;
-    return embed
-        .setAuthor({ name: 'Now Playing', iconURL: iconUrl })
-        .setDescription(`[${player.current.info.title}](${player.current.info.uri}) by ${player.current.info.author} • \`[${client.utils.formatTime(player.current.info.length)}]\` - Requested by <@${player.current.info.requester.id}>`)
-        .setImage(icon)
-        .setColor(client.color.main);
+"use strict";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/utils/SetupSystem.ts
+var SetupSystem_exports = {};
+__export(SetupSystem_exports, {
+  buttonReply: () => buttonReply,
+  oops: () => oops,
+  setupStart: () => setupStart,
+  trackStart: () => trackStart,
+  updateSetup: () => updateSetup
+});
+module.exports = __toCommonJS(SetupSystem_exports);
+var import_discord3 = require("discord.js");
+
+// src/structures/I18n.ts
+var import_i18n = __toESM(require("i18n"));
+var import_discord = require("discord.js");
+
+// src/structures/Logger.ts
+var import_signale = __toESM(require("signale"));
+var { Signale } = import_signale.default;
+var options = {
+  disabled: false,
+  interactive: false,
+  logLevel: "info",
+  scope: "Lavamusic",
+  types: {
+    info: {
+      badge: "\u2139",
+      color: "blue",
+      label: "info"
+    },
+    warn: {
+      badge: "\u26A0",
+      color: "yellow",
+      label: "warn"
+    },
+    error: {
+      badge: "\u2716",
+      color: "red",
+      label: "error"
+    },
+    debug: {
+      badge: "\u{1F41B}",
+      color: "magenta",
+      label: "debug"
+    },
+    success: {
+      badge: "\u2714",
+      color: "green",
+      label: "success"
+    },
+    log: {
+      badge: "\u{1F4DD}",
+      color: "white",
+      label: "log"
+    },
+    pause: {
+      badge: "\u23F8",
+      color: "yellow",
+      label: "pause"
+    },
+    start: {
+      badge: "\u25B6",
+      color: "green",
+      label: "start"
+    }
+  }
+};
+var Logger = class extends Signale {
+  static {
+    __name(this, "Logger");
+  }
+  constructor() {
+    super(options);
+  }
+};
+
+// src/structures/I18n.ts
+var logger = new Logger();
+function T(locale, text, ...params) {
+  import_i18n.default.setLocale(locale);
+  return import_i18n.default.__mf(text, ...params);
 }
+__name(T, "T");
+
+// src/utils/Buttons.ts
+var import_discord2 = require("discord.js");
+function getButtons(player, client) {
+  const buttonData = [
+    {
+      customId: "PREV_BUT",
+      emoji: client.emoji.previous,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "REWIND_BUT",
+      emoji: client.emoji.rewind,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "PAUSE_BUT",
+      emoji: player?.paused ? client.emoji.resume : client.emoji.pause,
+      style: player?.paused ? import_discord2.ButtonStyle.Success : import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "FORWARD_BUT",
+      emoji: client.emoji.forward,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "SKIP_BUT",
+      emoji: client.emoji.skip,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "LOW_VOL_BUT",
+      emoji: client.emoji.voldown,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "LOOP_BUT",
+      emoji: client.emoji.loop.none,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "STOP_BUT",
+      emoji: client.emoji.stop,
+      style: import_discord2.ButtonStyle.Danger
+    },
+    {
+      customId: "SHUFFLE_BUT",
+      emoji: client.emoji.shuffle,
+      style: import_discord2.ButtonStyle.Secondary
+    },
+    {
+      customId: "HIGH_VOL_BUT",
+      emoji: client.emoji.volup,
+      style: import_discord2.ButtonStyle.Secondary
+    }
+  ];
+  return buttonData.reduce((rows, { customId, emoji, style }, index) => {
+    if (index % 5 === 0) rows.push(new import_discord2.ActionRowBuilder());
+    let emojiFormat;
+    if (typeof emoji === "string" && emoji.startsWith("<:")) {
+      const match = emoji.match(/^<:\w+:(\d+)>$/);
+      emojiFormat = match ? match[1] : emoji;
+    } else {
+      emojiFormat = emoji;
+    }
+    const button = new import_discord2.ButtonBuilder().setCustomId(customId).setEmoji(emojiFormat).setStyle(style);
+    rows[rows.length - 1].addComponents(button);
+    return rows;
+  }, []);
+}
+__name(getButtons, "getButtons");
+
+// src/utils/SetupSystem.ts
+function neb(embed, player, client, locale) {
+  if (!player?.queue.current?.info) return embed;
+  const iconUrl = client.config.icons[player.queue.current.info.sourceName] || client.user.displayAvatarURL({
+    extension: "png"
+  });
+  const icon = player.queue.current.info.artworkUrl || client.config.links.img;
+  const description = T(locale, "player.setupStart.description", {
+    title: player.queue.current.info.title,
+    uri: player.queue.current.info.uri,
+    author: player.queue.current.info.author,
+    length: client.utils.formatTime(player.queue.current.info.duration),
+    requester: player.queue.current.requester.id
+  });
+  return embed.setAuthor({
+    name: T(locale, "player.setupStart.now_playing"),
+    iconURL: iconUrl
+  }).setDescription(description).setImage(icon).setColor(client.color.main);
+}
+__name(neb, "neb");
 async function setupStart(client, query, player, message) {
-    let m;
-    const embed = client.embed();
-    let n = client.embed().setColor(client.color.main);
-    const data = await client.prisma.setup.findFirst({
-        where: {
-            guildId: message.guild.id,
-        },
+  let m;
+  const embed = client.embed();
+  const n = client.embed().setColor(client.color.main);
+  const data = await client.db.getSetup(message.guild.id);
+  const locale = await client.db.getLanguage(message.guildId);
+  try {
+    if (data) m = await message.channel.messages.fetch({
+      message: data.messageId,
+      cache: true
     });
+  } catch (error) {
+    client.logger.error(error);
+  }
+  if (m) {
     try {
-        if (data)
-            m = await message.channel.messages.fetch({ message: data.messageId, cache: true });
-    }
-    catch (error) {
-        client.logger.error(error);
-    }
-    if (m) {
-        try {
-            let res = await client.queue.search(query);
-            switch (res.loadType) {
-                case 'LOAD_FAILED':
-                    await message.channel.send({ embeds: [embed.setColor(client.color.red).setDescription('There was an error while searching.')] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                    break;
-                case 'NO_MATCHES':
-                    await message.channel.send({ embeds: [embed.setColor(client.color.red).setDescription('There were no results found.')] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                    break;
-                case 'TRACK_LOADED':
-                    const track = player.buildTrack(res.tracks[0], message.author);
-                    if (player.queue.length > client.config.maxQueueSize) {
-                        await message.channel.send({ embeds: [embed.setColor(client.color.red).setDescription(`The queue is too long. The maximum length is ${client.config.maxQueueSize} songs.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                        return;
-                    }
-                    player.queue.push(track);
-                    await player.isPlaying();
-                    await message.channel.send({ embeds: [embed.setColor(client.color.main).setDescription(`Added [${res.tracks[0].info.title}](${res.tracks[0].info.uri}) to the queue.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                    neb(n, player, client);
-                    if (m)
-                        await m.edit({ embeds: [n] }).catch(() => { });
-                    break;
-                case 'PLAYLIST_LOADED':
-                    if (res.length > client.config.maxPlaylistSize) {
-                        await message.channel.send({ embeds: [embed.setColor(client.color.red).setDescription(`The playlist is too long. The maximum length is ${client.config.maxPlaylistSize} songs.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                        return;
-                    }
-                    for (const track of res.tracks) {
-                        const pl = player.buildTrack(track, message.author);
-                        if (player.queue.length > client.config.maxQueueSize) {
-                            await message.channel.send({ embeds: [embed.setColor(client.color.red).setDescription(`The queue is too long. The maximum length is ${client.config.maxQueueSize} songs.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                            return;
-                        }
-                        player.queue.push(pl);
-                    }
-                    await player.isPlaying();
-                    await message.channel.send({ embeds: [embed.setColor(client.color.main).setDescription(`Added [${res.tracks.length}](${res.tracks[0].info.uri}) to the queue.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                    neb(n, player, client);
-                    if (m)
-                        await m.edit({ embeds: [n] }).catch(() => { });
-                    break;
-                case 'SEARCH_RESULT':
-                    const track2 = player.buildTrack(res.tracks[0], message.author);
-                    if (player.queue.length > client.config.maxQueueSize) {
-                        await message.channel.send({ embeds: [embed.setColor(client.color.red).setDescription(`The queue is too long. The maximum length is ${client.config.maxQueueSize} songs.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                        return;
-                    }
-                    player.queue.push(track2);
-                    await player.isPlaying();
-                    await message.channel.send({ embeds: [embed.setColor(client.color.main).setDescription(`Added [${res.tracks[0].info.title}](${res.tracks[0].info.uri}) to the queue.`)] }).then((msg) => { setTimeout(() => { msg.delete(); }, 5000); });
-                    neb(n, player, client);
-                    if (m)
-                        await m.edit({ embeds: [n] }).catch(() => { });
-                    break;
-            }
-        }
-        catch (error) {
-            client.logger.error(error);
-        }
-    }
-}
-async function trackStart(msgId, channel, player, track, client) {
-    let icon = player.current ? player.current.info.thumbnail : client.config.links.img;
-    let m;
-    try {
-        m = await channel.messages.fetch({ message: msgId, cache: true });
-    }
-    catch (error) {
-        client.logger.error(error);
-    }
-    if (m) {
-        let iconUrl = client.config.icons[player.current.info.sourceName];
-        if (!iconUrl)
-            iconUrl = client.user.displayAvatarURL({ extension: 'png', });
-        const embed = client.embed()
-            .setAuthor({ name: `Now Playing`, iconURL: iconUrl })
-            .setColor(client.color.main)
-            .setDescription(`[${track.info.title}](${track.info.uri}) - \`[${client.utils.formatTime(track.info.length)}]\` - Requested by <@${track.info.requester.id}>`)
-            .setImage(icon);
-        await m.edit({
-            embeds: [embed],
-            components: getButtons().map((b) => {
-                b.components.forEach((c) => {
-                    c.setDisabled(player && player.current ? false : true);
-                });
-                return b;
-            })
-        }).catch(() => { });
-    }
-    else {
-        let iconUrl = client.config.icons[player.current.info.sourceName];
-        if (!iconUrl)
-            iconUrl = client.user.displayAvatarURL({ extension: 'png', });
-        const embed = client.embed()
-            .setColor(client.color.main)
-            .setAuthor({ name: `Now Playing`, iconURL: iconUrl })
-            .setDescription(`[${track.info.title}](${track.info.uri}) - \`[${client.utils.formatTime(track.info.length)}]\` - Requested by <@${track.info.requester.id}>`)
-            .setImage(icon);
-        await channel.send({
-            embeds: [embed],
-            components: getButtons().map((b) => {
-                b.components.forEach((c) => {
-                    c.setDisabled(player && player.current ? false : true);
-                });
-                return b;
-            })
-        }).then(async (msg) => {
-            await client.prisma.setup.update({
-                where: {
-                    guildId: channel.guild.id,
-                },
-                data: {
-                    messageId: msg.id,
-                },
+      if (message.inGuild()) {
+        const res = await player.search(query, message.author);
+        switch (res.loadType) {
+          case "empty":
+          case "error":
+            await message.channel.send({
+              embeds: [
+                embed.setColor(client.color.red).setDescription(T(locale, "player.setupStart.error_searching"))
+              ]
+            }).then((msg) => setTimeout(() => msg.delete(), 5e3));
+            break;
+          case "search":
+          case "track": {
+            player.queue.add(res.tracks[0]);
+            await message.channel.send({
+              embeds: [
+                embed.setColor(client.color.main).setDescription(T(locale, "player.setupStart.added_to_queue", {
+                  title: res.tracks[0].info.title,
+                  uri: res.tracks[0].info.uri
+                }))
+              ]
+            }).then((msg) => setTimeout(() => msg.delete(), 5e3));
+            neb(n, player, client, locale);
+            await m.edit({
+              embeds: [
+                n
+              ]
+            }).catch(() => {
+              null;
             });
-        }).catch(() => { });
+            break;
+          }
+          case "playlist": {
+            player.queue.add(res.tracks);
+            await message.channel.send({
+              embeds: [
+                embed.setColor(client.color.main).setDescription(T(locale, "player.setupStart.added_playlist_to_queue", {
+                  length: res.tracks.length
+                }))
+              ]
+            }).then((msg) => setTimeout(() => msg.delete(), 5e3));
+            neb(n, player, client, locale);
+            await m.edit({
+              embeds: [
+                n
+              ]
+            }).catch(() => {
+              null;
+            });
+            break;
+          }
+        }
+        if (!player.playing && player.queue.tracks.length > 0) await player.play();
+      }
+    } catch (error) {
+      client.logger.error(error);
     }
+  }
 }
-async function updateSetup(client, guild) {
-    let setup = await client.prisma.setup.findUnique({
-        where: {
-            guildId: guild.id,
-        },
+__name(setupStart, "setupStart");
+async function trackStart(msgId, channel, player, track, client, locale) {
+  const icon = player.queue.current ? player.queue.current.info.artworkUrl : client.config.links.img;
+  let m;
+  try {
+    m = await channel.messages.fetch({
+      message: msgId,
+      cache: true
     });
-    let m;
-    if (setup && setup.textId) {
-        const textChannel = guild.channels.cache.get(setup.textId);
-        if (!textChannel)
-            return;
-        try {
-            m = await textChannel.messages.fetch({ message: setup.messageId, cache: true });
-        }
-        catch (error) {
-            client.logger.error(error);
-        }
-    }
-    if (m) {
-        const player = client.queue.get(guild.id);
-        if (player && player.current) {
-            let iconUrl = client.config.icons[player.current.info.sourceName];
-            if (!iconUrl)
-                iconUrl = client.user.displayAvatarURL({ extension: 'png', });
-            const embed = client.embed()
-                .setAuthor({ name: `Now Playing`, iconURL: iconUrl })
-                .setColor(client.color.main)
-                .setDescription(`[${player.current.info.title}](${player.current.info.uri}) - \`[${client.utils.formatTime(player.current.info.length)}]\` - Requested by <@${player.current.info.requester.id}>`)
-                .setImage(player.current.info.thumbnail);
-            await m.edit({
-                embeds: [embed],
-                components: getButtons().map((b) => {
-                    b.components.forEach((c) => {
-                        c.setDisabled(player && player.current ? false : true);
-                    });
-                    return b;
-                })
-            }).catch(() => { });
-        }
-        else {
-            const embed = client.embed()
-                .setColor(client.color.main)
-                .setAuthor({ name: client.user.username, iconURL: client.user.displayAvatarURL({ extension: 'png', }) })
-                .setDescription(`Nothing playing right now`)
-                .setImage(client.config.links.img);
-            await m.edit({
-                embeds: [embed],
-                components: getButtons().map((b) => {
-                    b.components.forEach((c) => {
-                        c.setDisabled(true);
-                    });
-                    return b;
-                })
-            }).catch(() => { });
-        }
-    }
+  } catch (error) {
+    client.logger.error(error);
+  }
+  const iconUrl = client.config.icons[player.queue.current.info.sourceName] || client.user.displayAvatarURL({
+    extension: "png"
+  });
+  const description = T(locale, "player.setupStart.description", {
+    title: track.info.title,
+    uri: track.info.uri,
+    author: track.info.author,
+    length: client.utils.formatTime(track.info.duration),
+    requester: player.queue.current.requester.id
+  });
+  const embed = client.embed().setAuthor({
+    name: T(locale, "player.setupStart.now_playing"),
+    iconURL: iconUrl
+  }).setColor(client.color.main).setDescription(description).setImage(icon);
+  if (m) {
+    await m.edit({
+      embeds: [
+        embed
+      ],
+      components: getButtons(player, client).map((b) => {
+        b.components.forEach((c) => c.setDisabled(!player?.queue.current));
+        return b;
+      })
+    }).catch(() => {
+      null;
+    });
+  } else {
+    await channel.send({
+      embeds: [
+        embed
+      ],
+      components: getButtons(player, client).map((b) => {
+        b.components.forEach((c) => c.setDisabled(!player?.queue.current));
+        return b;
+      })
+    }).then((msg) => {
+      client.db.setSetup(msg.guild.id, msg.id, msg.channel.id);
+    }).catch(() => {
+      null;
+    });
+  }
 }
-async function buttonReply(int, args, color) {
-    const embed = new EmbedBuilder();
-    let m;
-    if (int.replied) {
-        m = await int.editReply({ embeds: [embed.setColor(color).setDescription(args)] }).catch(() => { });
-    }
-    else {
-        m = await int.followUp({ embeds: [embed.setColor(color).setDescription(args)] }).catch(() => { });
-    }
-    setTimeout(async () => {
-        if (int && !int.ephemeral) {
-            await m.delete().catch(() => { });
-        }
-    }, 2000);
-}
-async function oops(channel, args) {
+__name(trackStart, "trackStart");
+async function updateSetup(client, guild, locale) {
+  const setup = await client.db.getSetup(guild.id);
+  let m;
+  if (setup?.textId) {
+    const textChannel = guild.channels.cache.get(setup.textId);
+    if (!textChannel) return;
     try {
-        let embed1 = new EmbedBuilder().setColor("Red").setDescription(`${args}`);
-        const m = await channel.send({
-            embeds: [embed1],
-        });
-        setTimeout(async () => await m.delete().catch(() => { }), 12000);
+      m = await textChannel.messages.fetch({
+        message: setup.messageId,
+        cache: true
+      });
+    } catch (error) {
+      client.logger.error(error);
     }
-    catch (e) {
-        return console.error(e);
+  }
+  if (m) {
+    const player = client.manager.getPlayer(guild.id);
+    if (player?.queue.current) {
+      const iconUrl = client.config.icons[player.queue.current.info.sourceName] || client.user.displayAvatarURL({
+        extension: "png"
+      });
+      const description = T(locale, "player.setupStart.description", {
+        title: player.queue.current.info.title,
+        uri: player.queue.current.info.uri,
+        author: player.queue.current.info.author,
+        length: client.utils.formatTime(player.queue.current.info.duration),
+        requester: player.queue.current.requester.id
+      });
+      const embed = client.embed().setAuthor({
+        name: T(locale, "player.setupStart.now_playing"),
+        iconURL: iconUrl
+      }).setColor(client.color.main).setDescription(description).setImage(player.queue.current.info.artworkUrl);
+      await m.edit({
+        embeds: [
+          embed
+        ],
+        components: getButtons(player, client).map((b) => {
+          b.components.forEach((c) => c.setDisabled(!player?.queue.current));
+          return b;
+        })
+      }).catch(() => {
+        null;
+      });
+    } else {
+      const embed = client.embed().setColor(client.color.main).setAuthor({
+        name: client.user.username,
+        iconURL: client.user.displayAvatarURL({
+          extension: "png"
+        })
+      }).setDescription(T(locale, "player.setupStart.nothing_playing")).setImage(client.config.links.img);
+      await m.edit({
+        embeds: [
+          embed
+        ],
+        components: getButtons(player, client).map((b) => {
+          b.components.forEach((c) => c.setDisabled(true));
+          return b;
+        })
+      }).catch(() => {
+        null;
+      });
     }
+  }
 }
-export { setupStart, trackStart, buttonReply, updateSetup, oops };
-/**
- * Project: lavamusic
- * Author: Blacky
- * Company: Coders
- * Copyright (c) 2023. All rights reserved.
- * This code is the property of Coder and may not be reproduced or
- * modified without permission. For more information, contact us at
- * https://discord.gg/ns8CTk9J3e
- */ 
+__name(updateSetup, "updateSetup");
+async function buttonReply(int, args, color) {
+  const embed = new import_discord3.EmbedBuilder();
+  let m;
+  if (int.replied) {
+    m = await int.editReply({
+      embeds: [
+        embed.setColor(color).setDescription(args)
+      ]
+    }).catch(() => {
+      null;
+    });
+  } else {
+    m = await int.followUp({
+      embeds: [
+        embed.setColor(color).setDescription(args)
+      ]
+    }).catch(() => {
+      null;
+    });
+  }
+  setTimeout(async () => {
+    if (int && !int.flags?.has(import_discord3.MessageFlags.Ephemeral)) {
+      await m.delete().catch(() => {
+        null;
+      });
+    }
+  }, 2e3);
+}
+__name(buttonReply, "buttonReply");
+async function oops(channel, args) {
+  try {
+    const embed1 = new import_discord3.EmbedBuilder().setColor("Red").setDescription(`${args}`);
+    const m = await channel.send({
+      embeds: [
+        embed1
+      ]
+    });
+    setTimeout(async () => await m.delete().catch(() => {
+      null;
+    }), 12e3);
+  } catch (e) {
+    return console.error(e);
+  }
+}
+__name(oops, "oops");
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  buttonReply,
+  oops,
+  setupStart,
+  trackStart,
+  updateSetup
+});

@@ -1,67 +1,357 @@
-import { Command } from '../../structures/index.js';
-export default class LavaLink extends Command {
-    constructor(client) {
-        super(client, {
-            name: 'lavalink',
-            description: {
-                content: 'Shows the current Lavalink stats',
-                examples: ['lavalink'],
-                usage: 'lavalink',
-            },
-            category: 'info',
-            aliases: ['ll'],
-            cooldown: 3,
-            args: false,
-            player: {
-                voice: false,
-                dj: false,
-                active: false,
-                djPerm: null,
-            },
-            permissions: {
-                dev: false,
-                client: ['SendMessages', 'ViewChannel', 'EmbedLinks'],
-                user: [],
-            },
-            slashCommand: true,
-        });
+"use strict";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/commands/info/LavaLink.ts
+var LavaLink_exports = {};
+__export(LavaLink_exports, {
+  default: () => LavaLink
+});
+module.exports = __toCommonJS(LavaLink_exports);
+
+// src/structures/Command.ts
+var Command = class {
+  static {
+    __name(this, "Command");
+  }
+  client;
+  name;
+  name_localizations;
+  description;
+  description_localizations;
+  aliases;
+  cooldown;
+  args;
+  vote;
+  player;
+  permissions;
+  slashCommand;
+  options;
+  category;
+  constructor(client, options2) {
+    this.client = client;
+    this.name = options2.name;
+    this.name_localizations = options2.name_localizations ?? {};
+    this.description = {
+      content: options2.description?.content ?? "No description provided",
+      usage: options2.description?.usage ?? "No usage provided",
+      examples: options2.description?.examples ?? [
+        "No examples provided"
+      ]
+    };
+    this.description_localizations = options2.description_localizations ?? {};
+    this.aliases = options2.aliases ?? [];
+    this.cooldown = options2.cooldown ?? 3;
+    this.args = options2.args ?? false;
+    this.vote = options2.vote ?? false;
+    this.player = {
+      voice: options2.player?.voice ?? false,
+      dj: options2.player?.dj ?? false,
+      active: options2.player?.active ?? false,
+      djPerm: options2.player?.djPerm ?? null
+    };
+    this.permissions = {
+      dev: options2.permissions?.dev ?? false,
+      client: options2.permissions?.client ?? [
+        "SendMessages",
+        "ViewChannel",
+        "EmbedLinks"
+      ],
+      user: options2.permissions?.user ?? []
+    };
+    this.slashCommand = options2.slashCommand ?? false;
+    this.options = options2.options ?? [];
+    this.category = options2.category ?? "general";
+  }
+  async run(_client, _message, _args) {
+    return await Promise.resolve();
+  }
+};
+
+// src/structures/Context.ts
+var import_discord2 = require("discord.js");
+
+// src/env.ts
+var import_node_path = __toESM(require("path"));
+var import_dotenv = require("dotenv");
+var import_zod = require("zod");
+(0, import_dotenv.config)({
+  path: import_node_path.default.join(__dirname, ".env")
+});
+var LavalinkNodeSchema = import_zod.z.object({
+  id: import_zod.z.string(),
+  host: import_zod.z.string(),
+  port: import_zod.z.number(),
+  authorization: import_zod.z.string(),
+  secure: import_zod.z.preprocess((val) => val === "true" || val === "false" ? val === "true" : val, import_zod.z.boolean().optional()),
+  sessionId: import_zod.z.string().optional(),
+  regions: import_zod.z.string().array().optional(),
+  retryAmount: import_zod.z.number().optional(),
+  retryDelay: import_zod.z.number().optional(),
+  requestSignalTimeoutMS: import_zod.z.number().optional(),
+  closeOnError: import_zod.z.boolean().optional(),
+  heartBeatInterval: import_zod.z.number().optional(),
+  enablePingOnStatsCheck: import_zod.z.boolean().optional()
+});
+var envSchema = import_zod.z.object({
+  TOKEN: import_zod.z.string(),
+  CLIENT_ID: import_zod.z.string(),
+  DEFAULT_LANGUAGE: import_zod.z.string().default("EnglishUS"),
+  PREFIX: import_zod.z.string().default("!"),
+  OWNER_IDS: import_zod.z.preprocess((val) => typeof val === "string" ? JSON.parse(val) : val, import_zod.z.string().array().optional()),
+  GUILD_ID: import_zod.z.string().optional(),
+  TOPGG: import_zod.z.string().optional(),
+  KEEP_ALIVE: import_zod.z.preprocess((val) => val === "true", import_zod.z.boolean().default(false)),
+  LOG_CHANNEL_ID: import_zod.z.string().optional(),
+  LOG_COMMANDS_ID: import_zod.z.string().optional(),
+  BOT_STATUS: import_zod.z.preprocess((val) => {
+    if (typeof val === "string") {
+      return val.toLowerCase();
     }
-    async run(client, ctx) {
-        let nodes = [];
-        client.shoukaku.nodes.forEach((node) => {
-            try {
-                nodes.push([
-                    { name: "Name", value: `${node.name} (${node.stats ? "🟢" : "🔴"})` },
-                    { name: "Player", value: `${node.stats.players}` },
-                    { name: "Playing Players", value: `${node.stats.playingPlayers}` },
-                    { name: "Uptime", value: `${client.utils.formatTime(node.stats.uptime)}` },
-                    { name: "Cores", value: `${node.stats.cpu.cores + " Core(s)"}` },
-                    { name: "Memory Usage", value: `${client.utils.formatBytes(node.stats.memory.used)}/${client.utils.formatBytes(node.stats.memory.reservable)}` },
-                    { name: "System Load", value: `${(Math.round(node.stats.cpu.systemLoad * 100) / 100).toFixed(2)}%` },
-                    { name: "Lavalink Load", value: `${(Math.round(node.stats.cpu.lavalinkLoad * 100) / 100).toFixed(2)}%` },
-                ]);
-            }
-            catch (e) {
-                console.log(e);
-            }
-        });
-
-        let fields = [];
-
-        for (let i = 0; i < nodes.length; i+=3) {
-            nodes[i+2]?fields.push([...nodes[i], ...nodes[i+1], ...nodes[i+2]]):
-                nodes[i+1]?fields.push([...nodes[i], ...nodes[i+1]]):
-                    fields.push(...nodes[i]);
-        }
-
-        for (const field of fields) {
-            const embed = this.client.embed();
-            embed.setTitle("Lavalink Stats");
-            embed.setColor(this.client.color.main);
-            embed.setThumbnail(this.client.user.avatarURL({}));
-            embed.setTimestamp();
-            embed.addFields(field);
-            await ctx.sendMessage({ embeds: [embed] })
-        }
+    return val;
+  }, import_zod.z.enum([
+    "online",
+    "idle",
+    "dnd",
+    "invisible"
+  ]).default("online")),
+  BOT_ACTIVITY: import_zod.z.string().default("Lavamusic"),
+  BOT_ACTIVITY_TYPE: import_zod.z.preprocess((val) => {
+    if (typeof val === "string") {
+      return Number.parseInt(val, 10);
     }
+    return val;
+  }, import_zod.z.number().default(0)),
+  DATABASE_URL: import_zod.z.string().optional(),
+  SEARCH_ENGINE: import_zod.z.preprocess((val) => {
+    if (typeof val === "string") {
+      return val.toLowerCase();
+    }
+    return val;
+  }, import_zod.z.enum([
+    "youtube",
+    "youtubemusic",
+    "soundcloud",
+    "spotify",
+    "apple",
+    "deezer",
+    "yandex",
+    "jiosaavn"
+  ]).default("youtube")),
+  NODES: import_zod.z.preprocess((val) => typeof val === "string" ? JSON.parse(val) : val, import_zod.z.array(LavalinkNodeSchema)),
+  GENIUS_API: import_zod.z.string().optional()
+});
+var env = envSchema.parse(process.env);
+for (const key in env) {
+  if (!(key in env)) {
+    throw new Error(`Missing env variable: ${key}. Please check the .env file and try again.`);
+  }
 }
+
+// src/structures/I18n.ts
+var import_i18n = __toESM(require("i18n"));
+var import_discord = require("discord.js");
+
+// src/structures/Logger.ts
+var import_signale = __toESM(require("signale"));
+var { Signale } = import_signale.default;
+var options = {
+  disabled: false,
+  interactive: false,
+  logLevel: "info",
+  scope: "Lavamusic",
+  types: {
+    info: {
+      badge: "\u2139",
+      color: "blue",
+      label: "info"
+    },
+    warn: {
+      badge: "\u26A0",
+      color: "yellow",
+      label: "warn"
+    },
+    error: {
+      badge: "\u2716",
+      color: "red",
+      label: "error"
+    },
+    debug: {
+      badge: "\u{1F41B}",
+      color: "magenta",
+      label: "debug"
+    },
+    success: {
+      badge: "\u2714",
+      color: "green",
+      label: "success"
+    },
+    log: {
+      badge: "\u{1F4DD}",
+      color: "white",
+      label: "log"
+    },
+    pause: {
+      badge: "\u23F8",
+      color: "yellow",
+      label: "pause"
+    },
+    start: {
+      badge: "\u25B6",
+      color: "green",
+      label: "start"
+    }
+  }
+};
+var Logger = class extends Signale {
+  static {
+    __name(this, "Logger");
+  }
+  constructor() {
+    super(options);
+  }
+};
+
+// src/structures/I18n.ts
+var logger = new Logger();
+
+// src/structures/Lavamusic.ts
+var import_node_fs2 = __toESM(require("fs"));
+var import_node_path3 = __toESM(require("path"));
+var import_sdk = require("@top-gg/sdk");
+var import_discord4 = require("discord.js");
+var import_discord5 = require("discord.js");
+
+// src/database/server.ts
+var import_client = require("@prisma/client");
+
+// src/plugin/index.ts
+var import_node_fs = __toESM(require("fs"));
+var import_node_path2 = __toESM(require("path"));
+var pluginsFolder = import_node_path2.default.join(process.cwd(), "plugin", "plugins");
+
+// src/utils/Utils.ts
+var import_discord3 = require("discord.js");
+
+// src/structures/LavalinkClient.ts
+var import_lavalink_client = require("lavalink-client");
+
+// src/commands/info/LavaLink.ts
+var LavaLink = class extends Command {
+  static {
+    __name(this, "LavaLink");
+  }
+  constructor(client) {
+    super(client, {
+      name: "lavalink",
+      description: {
+        content: "cmd.lavalink.description",
+        examples: [
+          "lavalink"
+        ],
+        usage: "lavalink"
+      },
+      category: "info",
+      aliases: [
+        "ll"
+      ],
+      cooldown: 3,
+      args: false,
+      vote: false,
+      player: {
+        voice: false,
+        dj: false,
+        active: false,
+        djPerm: null
+      },
+      permissions: {
+        dev: false,
+        client: [
+          "SendMessages",
+          "ReadMessageHistory",
+          "ViewChannel",
+          "EmbedLinks"
+        ],
+        user: []
+      },
+      slashCommand: true,
+      options: []
+    });
+  }
+  async run(client, ctx) {
+    const nodes = client.manager.nodeManager.nodes;
+    const nodesPerPage = 2;
+    const nodeArray = Array.from(nodes.values());
+    const chunks = client.utils.chunk(nodeArray, nodesPerPage);
+    if (chunks.length === 0) chunks.push(nodeArray);
+    const pages = chunks.map((chunk, index) => {
+      const embed = this.client.embed().setTitle(ctx.locale("cmd.lavalink.title")).setColor(this.client.color.main).setThumbnail(client.user?.avatarURL()).setTimestamp();
+      chunk.forEach((node) => {
+        const statusEmoji = node.stats ? "\u{1F7E2}" : "\u{1F534}";
+        const stats = node.stats || {
+          players: 0,
+          playingPlayers: 0,
+          uptime: 0,
+          cpu: {
+            cores: 0,
+            systemLoad: 0,
+            lavalinkLoad: 0
+          },
+          memory: {
+            used: 0,
+            reservable: 0
+          }
+        };
+        embed.addFields({
+          name: `${node.id} (${statusEmoji})`,
+          value: `\`\`\`yaml
+${ctx.locale("cmd.lavalink.content", {
+            players: stats.players,
+            playingPlayers: stats.playingPlayers,
+            uptime: client.utils.formatTime(stats.uptime),
+            cores: stats.cpu.cores,
+            used: client.utils.formatBytes(stats.memory.used),
+            reservable: client.utils.formatBytes(stats.memory.reservable),
+            systemLoad: (stats.cpu.systemLoad * 100).toFixed(2),
+            lavalinkLoad: (stats.cpu.lavalinkLoad * 100).toFixed(2)
+          })}
+\`\`\``
+        });
+      });
+      embed.setFooter({
+        text: ctx.locale("cmd.lavalink.page_info", {
+          index: index + 1,
+          total: chunks.length
+        })
+      });
+      return embed;
+    });
+    return await client.utils.paginate(client, ctx, pages);
+  }
+};

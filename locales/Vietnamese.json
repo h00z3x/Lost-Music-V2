@@ -1,0 +1,249 @@
+{
+	"cmd": {
+		"247": {
+			"description": "cmd.247.description"
+		},
+		"dj": {
+			"description": "cmd.dj.description",
+			"options": {
+				"add": "cmd.dj.options.add",
+				"remove": "cmd.dj.options.remove",
+				"clear": "cmd.dj.options.clear",
+				"toggle": "cmd.dj.options.toggle",
+				"role": "cmd.dj.options.role"
+			}
+		},
+		"language": {
+			"description": "cmd.language.description",
+			"options": {
+				"set": "cmd.language.options.set",
+				"reset": "cmd.language.options.reset",
+				"language": "cmd.language.options.language"
+			}
+		},
+		"prefix": {
+			"description": "cmd.prefix.description",
+			"options": {
+				"set": "cmd.prefix.options.set",
+				"reset": "cmd.prefix.options.reset",
+				"prefix": "cmd.prefix.options.prefix"
+			}
+		},
+		"setup": {
+			"description": "cmd.setup.description",
+			"options": {
+				"create": "cmd.setup.options.create",
+				"delete": "cmd.setup.options.delete",
+				"info": "cmd.setup.options.info"
+			}
+		},
+		"8d": {
+			"description": "cmd.8d.description"
+		},
+		"bassboost": {
+			"description": "cmd.bassboost.description",
+			"options": {
+				"level": "cmd.bassboost.options.level"
+			}
+		},
+		"karaoke": {
+			"description": "cmd.karaoke.description"
+		},
+		"lowpass": {
+			"description": "cmd.lowpass.description"
+		},
+		"nightcore": {
+			"description": "cmd.nightcore.description"
+		},
+		"pitch": {
+			"description": "cmd.pitch.description",
+			"options": {
+				"pitch": "cmd.pitch.options.pitch"
+			}
+		},
+		"rate": {
+			"description": "cmd.rate.description",
+			"options": {
+				"rate": "cmd.rate.options.rate"
+			}
+		},
+		"reset": {
+			"description": "cmd.reset.description"
+		},
+		"rotation": {
+			"description": "cmd.rotation.description"
+		},
+		"speed": {
+			"description": "cmd.speed.description",
+			"options": {
+				"speed": "cmd.speed.options.speed"
+			}
+		},
+		"tremolo": {
+			"description": "cmd.tremolo.description"
+		},
+		"vibrato": {
+			"description": "cmd.vibrato.description"
+		},
+		"about": {
+			"description": "cmd.about.description"
+		},
+		"botinfo": {
+			"description": "cmd.botinfo.description"
+		},
+		"help": {
+			"description": "cmd.help.description",
+			"options": {
+				"command": "cmd.help.options.command"
+			}
+		},
+		"invite": {
+			"description": "cmd.invite.description"
+		},
+		"lavalink": {
+			"description": "cmd.lavalink.description"
+		},
+		"ping": {
+			"description": "cmd.ping.description"
+		},
+		"autoplay": {
+			"description": "cmd.autoplay.description"
+		},
+		"clearqueue": {
+			"description": "cmd.clearqueue.description"
+		},
+		"grab": {
+			"description": "cmd.grab.description"
+		},
+		"join": {
+			"description": "cmd.join.description"
+		},
+		"leave": {
+			"description": "cmd.leave.description"
+		},
+		"loop": {
+			"description": "cmd.loop.description"
+		},
+		"lyrics": {
+			"description": "cmd.lyrics.description"
+		},
+		"nowplaying": {
+			"description": "cmd.nowplaying.description"
+		},
+		"pause": {
+			"description": "cmd.pause.description"
+		},
+		"play": {
+			"description": "cmd.play.description",
+			"options": {
+				"song": "cmd.play.options.song"
+			}
+		},
+		"playlocal": {
+			"description": "cmd.playlocal.description",
+			"options": {
+				"file": "cmd.playlocal.options.file"
+			}
+		},
+		"playnext": {
+			"description": "cmd.playnext.description",
+			"options": {
+				"song": "cmd.playnext.options.song"
+			}
+		},
+		"queue": {
+			"description": "cmd.queue.description"
+		},
+		"remove": {
+			"description": "cmd.remove.description",
+			"options": {
+				"song": "cmd.remove.options.song"
+			}
+		},
+		"replay": {
+			"description": "cmd.replay.description"
+		},
+		"resume": {
+			"description": "cmd.resume.description"
+		},
+		"search": {
+			"description": "cmd.search.description",
+			"options": {
+				"song": "cmd.search.options.song"
+			}
+		},
+		"seek": {
+			"description": "cmd.seek.description",
+			"options": {
+				"duration": "cmd.seek.options.duration"
+			}
+		},
+		"shuffle": {
+			"description": "cmd.shuffle.description"
+		},
+		"skip": {
+			"description": "cmd.skip.description"
+		},
+		"skipto": {
+			"description": "cmd.skipto.description",
+			"options": {
+				"number": "cmd.skipto.options.number"
+			}
+		},
+		"stop": {
+			"description": "cmd.stop.description"
+		},
+		"volume": {
+			"description": "cmd.volume.description",
+			"options": {
+				"number": "cmd.volume.options.number"
+			}
+		},
+		"addsong": {
+			"description": "cmd.addsong.description",
+			"options": {
+				"playlist": "cmd.addsong.options.playlist",
+				"song": "cmd.addsong.options.song"
+			}
+		},
+		"create": {
+			"description": "cmd.create.description",
+			"options": {
+				"name": "cmd.create.options.name"
+			}
+		},
+		"delete": {
+			"description": "cmd.delete.description",
+			"options": {
+				"playlist": "cmd.delete.options.playlist"
+			}
+		},
+		"list": {
+			"description": "cmd.list.description",
+			"options": {
+				"user": "cmd.list.options.user"
+			}
+		},
+		"load": {
+			"description": "cmd.load.description",
+			"options": {
+				"playlist": "cmd.load.options.playlist"
+			}
+		},
+		"removesong": {
+			"description": "cmd.removesong.description",
+			"options": {
+				"playlist": "cmd.removesong.options.playlist",
+				"song": "cmd.removesong.options.song"
+			}
+		},
+		"steal": {
+			"description": "cmd.steal.description",
+			"options": {
+				"user": "cmd.steal.options.user",
+				"playlist": "cmd.steal.options.playlist"
+			}
+		}
+	},
+	"The loop mode you want to set": "The loop mode you want to set"
+}

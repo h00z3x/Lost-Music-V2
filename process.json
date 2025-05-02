@@ -1,0 +1,10 @@
+{
+	"apps": [
+		{
+			"name": "lavamusic",
+			"script": "index.js",
+			"node_args": ["--enable-source-maps"],
+			"restart_delay": 10000
+		}
+	]
+}

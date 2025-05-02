@@ -1,23 +1,53 @@
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-export default function loadPlugins(client) {
-    const pluginsFolder = path.join(__dirname, './plugins');
-    const pluginFiles = fs.readdirSync(pluginsFolder).filter((file) => file.endsWith('.js'));
-    pluginFiles.forEach(async (file) => {
-        const plugin = (await import(`./plugins/${file}`)).default;
-        if (plugin.initialize)
-            plugin.initialize(client);
-        client.logger.info(`Loaded plugin: ${plugin.name} v${plugin.version}`);
-    });
+"use strict";
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+
+// src/plugin/index.ts
+var plugin_exports = {};
+__export(plugin_exports, {
+  default: () => loadPlugins
+});
+module.exports = __toCommonJS(plugin_exports);
+var import_node_fs = __toESM(require("fs"));
+var import_node_path = __toESM(require("path"));
+var pluginsFolder = import_node_path.default.join(process.cwd(), "plugin", "plugins");
+async function loadPlugins(client) {
+  try {
+    const pluginFiles = import_node_fs.default.readdirSync(pluginsFolder).filter((file) => file.endsWith(".js"));
+    for (const file of pluginFiles) {
+      const pluginPath = import_node_path.default.join(pluginsFolder, file);
+      const { default: plugin } = require(pluginPath);
+      if (plugin.initialize) plugin.initialize(client);
+      client.logger.info(`Loaded plugin: ${plugin.name} v${plugin.version}`);
+    }
+  } catch (error) {
+    client.logger.error("Error loading plugins:", error);
+  }
 }
-/**
- * Project: lavamusic
- * Author: Blacky
- * Company: Coders
- * Copyright (c) 2023. All rights reserved.
- * This code is the property of Coder and may not be reproduced or
- * modified without permission. For more information, contact us at
- * https://discord.gg/ns8CTk9J3e
- */
+__name(loadPlugins, "loadPlugins");
